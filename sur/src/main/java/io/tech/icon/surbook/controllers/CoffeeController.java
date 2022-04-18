@@ -26,15 +26,6 @@ public class CoffeeController
     public CoffeeController(CoffeeRepository coffeeRepository)
     {
         this.coffeeRepository = coffeeRepository;
-
-        List<Coffee> coffees = new ArrayList<>();
-
-        coffees.add(new Coffee("Café Cereza"));
-        coffees.add(new Coffee("Café Ganador"));
-        coffees.add(new Coffee("Café Lareño"));
-        coffees.add(new Coffee("Café Três Pontas"));
-
-        this.coffeeRepository.saveAll(coffees);
     }
 
     @GetMapping
@@ -58,9 +49,9 @@ public class CoffeeController
     @PutMapping("/{id}")
     ResponseEntity<Coffee> putCoffee(@PathVariable @NonNull String id, @RequestBody @NonNull Coffee coffee)
     {
-        return (!coffeeRepository.existsById(id))
-                ? new ResponseEntity<>(coffeeRepository.save(coffee), HttpStatus.CREATED)
-                : new ResponseEntity<>(coffeeRepository.save(coffee), HttpStatus.OK);
+        return (coffeeRepository.existsById(id))
+                ? new ResponseEntity<>(coffeeRepository.save(coffee), HttpStatus.OK)
+                : new ResponseEntity<>(coffeeRepository.save(coffee), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
