@@ -12,4 +12,6 @@ public interface EmployeeService
 
     Employee getEmployeeById(long id)
             throws ResourceNotFoundException;
+
+    Employee updateEmployee(Employee employee, long id);
 }
