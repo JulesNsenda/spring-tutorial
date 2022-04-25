@@ -14,4 +14,6 @@ public interface EmployeeService
             throws ResourceNotFoundException;
 
     Employee updateEmployee(Employee employee, long id);
+
+    void deleteEmployee(long id);
 }
