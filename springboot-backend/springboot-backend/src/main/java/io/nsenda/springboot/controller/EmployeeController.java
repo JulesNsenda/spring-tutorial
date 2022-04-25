@@ -2,9 +2,11 @@ package io.nsenda.springboot.controller;
 
 import io.nsenda.springboot.model.Employee;
 import io.nsenda.springboot.service.EmployeeService;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +23,16 @@ public class EmployeeController
         this.employeeService = employeeService;
     }
 
-    @PostMapping()
+    @PostMapping("/createEmployee")
     public ResponseEntity<Employee> saveEmployee(@RequestBody @NonNull Employee employee)
     {
         Employee emp = employeeService.saveEmployee(employee);
         return new ResponseEntity<>(emp, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getAllEmployees")
+    public List<Employee> getAllEmployees()
+    {
+        return employeeService.getAllEmployees();
     }
 }
